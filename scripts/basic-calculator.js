@@ -2,16 +2,20 @@
 const pwButton = document.getElementById('pw');
 const calcScreen = document.querySelector('.calculator-screen');
 const getNumbers = document.querySelectorAll('#number');
-const operations = document.querySelectorAll('#operation')
+const operations = document.querySelectorAll('#operation');
+const equalButton = document.getElementById('equal');
 
 
 // Other Variables
 let onOff = 0;
 let screenText = '';
-let result = 0;
+let result = null;
 let numeradorEntered = 0;
+let denominatorEntered = 0;
 let operation = 0;
 let numerador = 0;
+let denominator = null;
+let continuousCount = 0; 
 
 // Turn ON / OFF Calculator
 const activateCalculator = () => {
@@ -67,31 +71,52 @@ const operationSelection = (op) => {
 // Alert Numbers
 getNumbers.forEach(function(item){
     item.addEventListener('click', () => {
-            if(numeradorEntered == 1) {screenText = ''};
             screenText += item.innerText;
-            calcScreen.innerText = screenText;
+            calcScreen.innerText = screenText;       
     })
 });
 
 // Events
+
 // Activate Calculator
 pwButton.addEventListener('click', function(){
     activateCalculator();
 });
 
-//Operations
+// Operations
 operations.forEach(function(item){
     item.addEventListener('click', () => {
-        if (numeradorEntered == 0) {
-            numerador = parseFloat(screenText);
+
+        if (continuousCount == 0) {
+            numerador = parseFloat(calcScreen.innerText);
             operationSelection(item.innerText);
-            numeradorEntered = 1;
+            console.log(`Numerador ${numerador}`);
+            screenText = '';
+            continuousCount++;
         } else {
-            denominator = parseFloat(screenText);
+            denominator = parseFloat(calcScreen.innerText); 
             operator(numerador, denominator, operation);
             calcScreen.innerText = result;
+            numerador = result;
+            denominator = null;
+            screenText = '';
+            operationSelection(item.innerText);
         }
+        
     })
+});
+
+// Equal button
+equalButton.addEventListener('click', function(){
+    if (continuousCount == 0) {
+
+    } else {
+       denominator = parseFloat(calcScreen.innerText); 
+       operator(numerador, denominator, operation);
+       calcScreen.innerText = result;
+       screenText = '';
+       continuousCount = 0;
+    }
 });
 
 
