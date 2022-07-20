@@ -7,6 +7,7 @@ const getNumbers = document.querySelectorAll('#number');
 // Other Variables
 let onOff = 0;
 let screenText = '';
+let result = 0;
 
 // Turn ON / OFF Calculator
 const activateCalculator = () => {
@@ -16,6 +17,24 @@ const activateCalculator = () => {
     } else {
         calcScreen.innerText = '';
         onOff = 0;
+    }
+};
+
+const operator = (numerador, denominator, operation) => {
+    switch (operation) {
+        case 1: // Adding
+            result = numerador + denominator;
+        break; // Subs
+        case 2:
+            result = numerador - denominator;
+        break;
+        case 3: // Multiply
+            result = numerador * denominator;
+        break;
+        case 4: //Division
+            result = numerador / denominator;
+        break;
+        //default:
     }
 };
 
