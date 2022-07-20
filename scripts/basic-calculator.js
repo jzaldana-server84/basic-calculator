@@ -2,12 +2,16 @@
 const pwButton = document.getElementById('pw');
 const calcScreen = document.querySelector('.calculator-screen');
 const getNumbers = document.querySelectorAll('#number');
+const operations = document.querySelectorAll('#operation')
 
 
 // Other Variables
 let onOff = 0;
 let screenText = '';
 let result = 0;
+let numeradorEntered = 0;
+let operation = 0;
+let numerador = 0;
 
 // Turn ON / OFF Calculator
 const activateCalculator = () => {
@@ -20,6 +24,7 @@ const activateCalculator = () => {
     }
 };
 
+// Main calculation
 const operator = (numerador, denominator, operation) => {
     switch (operation) {
         case 1: // Adding
@@ -36,11 +41,33 @@ const operator = (numerador, denominator, operation) => {
         break;
         //default:
     }
+
+};
+
+//Operation selection
+const operationSelection = (op) => {
+    switch (op) {
+        case '+': // Adding
+            operation = 1;
+        break; // Subs
+        case '-':
+            operation = 2;
+        break;
+        case '*': // Multiply
+            operation = 3;
+        break;
+        case '/': //Division
+            operation = 4;
+        break;
+        //default:
+    }
+    return operation;
 };
 
 // Alert Numbers
 getNumbers.forEach(function(item){
     item.addEventListener('click', () => {
+            if(numeradorEntered == 1) {screenText = ''};
             screenText += item.innerText;
             calcScreen.innerText = screenText;
     })
@@ -52,6 +79,22 @@ pwButton.addEventListener('click', function(){
     activateCalculator();
 });
 
-console.log(getNumbers);
+//Operations
+operations.forEach(function(item){
+    item.addEventListener('click', () => {
+        if (numeradorEntered == 0) {
+            numerador = parseFloat(screenText);
+            operationSelection(item.innerText);
+            numeradorEntered = 1;
+        } else {
+            denominator = parseFloat(screenText);
+            operator(numerador, denominator, operation);
+            calcScreen.innerText = result;
+        }
+    })
+});
+
+
+
 
 
