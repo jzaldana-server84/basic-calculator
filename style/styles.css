@@ -28,6 +28,7 @@ body {
     border-radius: 15px;
     width: 350px;
     height: 55%;
+    box-shadow: 10px 10px 10px;
 }
 
 .calculator .calculator-screen {
@@ -72,4 +73,18 @@ body {
 
 #sqr, #pw, #CE, #C {
     font-size: 15px;
+}
+
+#pw {
+    color: white;
+    background-color: darkred;
+}
+
+#pw:hover {
+    background-color: darkgoldenrod;
+}
+
+.buttons:hover {
+    background-color: darkkhaki;
+    cursor: pointer;
 }
