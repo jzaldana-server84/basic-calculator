@@ -1,10 +1,10 @@
 // Elements Variables
-const pwButton = document.getElementById('pw');
+const pwPlus_minus = document.getElementById('plus-minus');
 const calcScreen = document.querySelector('.calculator-screen');
 const getNumbers = document.querySelectorAll('#number');
 const operations = document.querySelectorAll('#operation');
 const equalButton = document.getElementById('equal');
-
+const dotButton = document.getElementById('dot');
 
 // Other Variables
 let onOff = 0;
@@ -16,17 +16,7 @@ let operation = 0;
 let numerador = 0;
 let denominator = null;
 let continuousCount = 0; 
-
-// Turn ON / OFF Calculator
-const activateCalculator = () => {
-    if (onOff == 0) {
-        calcScreen.innerText = '0';
-        onOff = 1;
-    } else {
-        calcScreen.innerText = '';
-        onOff = 0;
-    }
-};
+let dotCount = 0;
 
 // Main calculation
 const operator = (numerador, denominator, operation) => {
@@ -71,16 +61,22 @@ const operationSelection = (op) => {
 // Alert Numbers
 getNumbers.forEach(function(item){
     item.addEventListener('click', () => {
-            screenText += item.innerText;
-            calcScreen.innerText = screenText;       
+        screenText += item.innerText;
+        calcScreen.innerText = screenText;      
     })
 });
 
 // Events
 
-// Activate Calculator
-pwButton.addEventListener('click', function(){
-    activateCalculator();
+// Add + / - sign
+pwPlus_minus.addEventListener('click', function(){
+    if (calcScreen.innerText.slice(0,1) !== '-' && screenText !== '') {
+        screenText  = '-' + screenText
+        calcScreen.innerText = screenText;
+    } else if (calcScreen.innerText.slice(0,1) == '-' && screenText !== '') {
+        screenText = screenText.slice(1);
+        calcScreen.innerText = screenText;
+    }
 });
 
 // Operations
@@ -93,6 +89,7 @@ operations.forEach(function(item){
             console.log(`Numerador ${numerador}`);
             screenText = '';
             continuousCount++;
+            dotCount = 0;
         } else {
             denominator = parseFloat(calcScreen.innerText); 
             operator(numerador, denominator, operation);
@@ -101,6 +98,7 @@ operations.forEach(function(item){
             denominator = null;
             screenText = '';
             operationSelection(item.innerText);
+            dotCount = 0;
         }
         
     })
@@ -116,10 +114,20 @@ equalButton.addEventListener('click', function(){
        calcScreen.innerText = result;
        screenText = '';
        continuousCount = 0;
+       dotCount = 0;
     }
 });
 
 
+dotButton.addEventListener('click', function() {
+    if (dotCount == 0) {
+        screenText = '0';
+        screenText += dotButton.innerText;
+        calcScreen.innerText = screenText;
+        dotCount++; 
+    } else {
 
+    }
+});
 
 

@@ -71,16 +71,16 @@ body {
     margin: 5px 5px;
 }
 
-#sqr, #pw, #CE, #C {
+#sqr, #plus-minus, #CE, #C {
     font-size: 15px;
 }
 
-#pw {
+#plus-minus {
     color: white;
     background-color: darkred;
 }
 
-#pw:hover {
+#plus-minus:hover {
     background-color: darkgoldenrod;
 }
 
