@@ -5,6 +5,9 @@ const getNumbers = document.querySelectorAll('#number');
 const operations = document.querySelectorAll('#operation');
 const equalButton = document.getElementById('equal');
 const dotButton = document.getElementById('dot');
+const sqrButton = document.getElementById('sqr');
+const cButton = document.getElementById('C');
+const ceButton = document.getElementById('CE');
 
 // Other Variables
 let onOff = 0;
@@ -118,7 +121,7 @@ equalButton.addEventListener('click', function(){
     }
 });
 
-
+// Dot limit function
 dotButton.addEventListener('click', function() {
     if (dotCount == 0) {
         screenText = '0';
@@ -130,4 +133,22 @@ dotButton.addEventListener('click', function() {
     }
 });
 
+// SQRT Calculation
+sqrButton.addEventListener('click', function(){
+    if (calcScreen.innerText !== '0') {
+        var sqrNumer = parseFloat(calcScreen.innerText);
+        result = Math.sqrt(sqrNumer);
+        calcScreen.innerText = result;
+    }
+});
 
+// Clear button
+cButton.addEventListener('click', function() {
+     location.reload();
+});
+
+// Clear entry button
+ceButton.addEventListener('click', function() {
+    calcScreen.innerHTML = '0';
+    screenText = '';
+});
