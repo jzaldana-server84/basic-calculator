@@ -34,7 +34,7 @@ body {
 
 .calculator .calculator-screen {
     background-color: white;
-    font-family: "Calculator Sans";
+    font-family: 'Segment7Standard';
     font-size: 30px;
     font-weight: bold;
     text-align: right;
